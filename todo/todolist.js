@@ -20,8 +20,7 @@ const fetchtodo = async() => {
 
 fetchtodo();
 
-
-const updateCompeleted = async(id, completed) => {
+const updateCompleted = async(id, completed) => {
     try {
         const response = await fetch(`http://localhost:3001/todos/${id}`, {
             method: "PATCH",
@@ -33,13 +32,14 @@ const updateCompeleted = async(id, completed) => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json(); // wait for JSON
-        console.log(data); // now logs actual response
-        display(); // update UI
+        const data = await response.json();
+        console.log("Updated todo:", data);
+        fetchtodo(); // refetch todos and display updated list
     } catch (error) {
-        console.error("Error adding todo:", error);
+        console.error("Error updating todo:", error);
     }
-}
+};
+
 
 const removeTodo = async(id) => {
     try {
@@ -87,7 +87,7 @@ function add() {
     let dueDate = InputDueDate.value;
     InputDueDate.value = "";
 
-    let newTodo;
+
 
     if (name === "" || dueDate === "") {
         alert("fill the required field");
@@ -107,7 +107,7 @@ function display() {
             console.log(todo.completed);
             todoHTML += `<p class=${
         todo.completed ? "completed" : ""
-      }><input onChange='updateCompeleted(${todo.id},this.checked)' type='checkbox' ${todo.completed ? "checked" : ""}> ${
+      }><input onchange='updateCompleted("${todo.id}", this.checked)' type='checkbox' ${todo.completed ? "checked" : ""}> ${
         todo.name
       } </p>   <p> ${
         todo.dueDate
