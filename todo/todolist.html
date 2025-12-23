@@ -8,13 +8,23 @@
 </head>
 
 <body>
-    <h1>Todo List</h1>
-    <div class="div-input-grid">
+    <div class="todo-head">
+        <h1>Todo List</h1>
+        <button id="themeToggle">🌙 Dark Mode</button>
+        <input placeholder="search your to do" type="text" id="search-text">
+    </div>
 
+    <div class="div-input-grid">
         <input id="input-text" placeholder="ToDo title" type="text">
+        <textarea name="description" id="description" placeholder="description"></textarea>
+        <input id="category-text" placeholder="category" type="text">
         <input id="input-date" placeholder="duedate" type="date">
+
+        <button type="button">status</button>
         <button type="button" id="add-button" class="add-button">Add</button>
     </div>
+
+
 
     <div class="div-grid" id="container">
     </div>
