@@ -1,144 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --border-color: #e2e8f0;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --primary-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+[data-theme="dark"] {
+    --bg-color: #000000;
+    --card-bg: #121212;
+    --text-color: #f1f5f9;
+    --border-color: #2d2d2d;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    transition: all 0.3s ease;
+}
+
+/* Main Wrapper to limit width and center */
+.app-wrapper {
+    width: 100%;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
-    background-color: #ffffff;
-    color: #111111;
-    transition: background 0.3s, color 0.3s;
+    gap: 25px;
 }
 
-body.dark {
-    background-color: #121212;
-    color: #f1f1f1;
+/* 1. Header Section */
+.todo-head {
+    text-align: center;
 }
 
-body.dark button {
-    background-color: #1e1e1e;
-    color: #ffffff;
+h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.div-grid,
-.div-input-grid {
-    /* background-color: white; */
-    /* box-shadow: rgb(14, 0, 0) 10px 0px 10px; */
-}
-
-.div-grid {
-    border: 1px solid red;
-}
-
-
-/* .todo-head {
-    display: flex;
-    justify-content: space-between;
-}
-
-.todo-head button {
-    width: 40px;
-    height: 40px;
-} */
-
-.div-grid,
-.div-input-grid {
-    display: grid;
-    grid-template-columns: 100px 400px 100px 100px 100px 100px;
-    column-gap: 10px;
-    row-gap: 10px;
-    align-items: center;
-    padding: 15px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.div-input-grid {
-    margin-bottom: 10px;
-}
-
-#input-text {
-    word-wrap: wrap;
-    overflow: hidden;
-    font-size: 16px;
-    padding: 5px 10px;
-    /* width: auto; */
-    outline: none;
-    overflow: hidden;
-    word-break: break-all;
-}
-
-p {
-    overflow: hidden;
-    word-wrap: break-word;
-    vertical-align: top;
-}
-
-#input-date {
-    font-size: 16px;
-    padding: 5px 5px;
-    /* width: 300px; */
+#search-text {
     width: 100%;
-    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    outline: none;
+    box-shadow: var(--shadow);
 }
 
+/* 2. Input Section (The White Card) */
+.div-input-grid {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    display: grid;
+    /* Three main columns like the image */
+    grid-template-columns: 1fr 200px 100px; 
+    gap: 15px;
+    border: 1px solid var(--border-color);
+}
+
+/* Description and Category span across the bottom */
+#description {
+    grid-column: span 3;
+    height: 60px;
+    resize: none;
+}
+#category-text { grid-column: span 1; }
+
+input, textarea {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    outline: none;
+    font-size: 15px;
+}
+
+/* 3. Buttons */
 .add-button {
-    background-color: green;
-    border: none;
-    font-size: 16px;
+    background: var(--primary-gradient);
     color: white;
-    text-align: center;
-    cursor: pointer;
-}
-
-button {
-    padding: 5px 15px;
-}
-
-.checkbox {
-    cursor: pointer;
-}
-
-input,
-select {
-    padding: 5px 10px;
-}
-
-.completed {
-    text-decoration: line-through;
-    color: red
-}
-
-#delete-button {
-    background-color: #c42e2e;
     border: none;
-    font-size: 16px;
-    color: white;
-    padding: 5px 15px;
-    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.add-button:hover { transform: translateY(-2px); }
+
+/* 4. Task List Container */
+#container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual Task Row - Matches the Input Card Alignment */
+.todo-row {
+    display: grid;
+    grid-template-columns: 1fr 200px 100px;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    transition: all 0.2s;
+}
+
+.todo-row:hover {
+    transform: translateX(10px);
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.task-date {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
 }
 
-@media (max-width:768px) {
-    body {
-        font-size: 16px;
-        padding: 10px 10px;
-    }
-    .div-grid,
-    .div-input-grid {
-        display: grid;
-        grid-template-columns: 50px 130px 90px 80px 80px 50px;
-    }
+.delete-btn:hover { background: #fecaca; }
+
+/* Floating Theme Toggle */
+#themeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    z-index: 100;
 }
 
-@media (max-width:1200) {
-    body {
-        font-size: 16px;
-        padding: 10px 10px;
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .div-input-grid, .todo-row {
+        grid-template-columns: 1fr;
     }
-    .div-grid,
-    .div-input-grid {
-        display: grid;
-        grid-template-columns: 70px 130px 90px 80px 80px 50px;
-    }
+    #description { grid-column: span 1; }
 }
