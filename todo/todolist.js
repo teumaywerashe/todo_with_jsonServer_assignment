@@ -217,12 +217,13 @@ function display(todolist) {
 
 // Light/Dark Theme
 
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+const themeToggle = document.getElementById('themeToggle'); 
 
 themeToggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
 
-    themeIcon.textContent = isDark ? '🌙' : '☀️';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+
+    themeToggle.textContent = isDark ? '🌙' : '☀️';
 });
