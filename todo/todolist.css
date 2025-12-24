@@ -192,3 +192,12 @@ input, textarea, select {
 }
 
 .completed { text-decoration: line-through; opacity: 0.5; }
+
+input:focus,
+textarea:focus,
+#search-text:focus,
+select:focus {
+    background-color: #eef2ff;   
+    border-color: #7678f3;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5);
+}
