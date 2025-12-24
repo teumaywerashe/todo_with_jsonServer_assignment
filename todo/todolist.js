@@ -213,3 +213,16 @@ function display(todolist) {
         container.innerHTML = todoHTML;
     }
 }
+
+
+// Light/Dark Theme
+
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+
+    themeIcon.textContent = isDark ? '🌙' : '☀️';
+});
