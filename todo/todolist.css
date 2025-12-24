@@ -12,7 +12,7 @@
 [data-theme="dark"] {
     --bg-color: #000000;
     --card-bg: #121212;
-    --text-color: #f1f5f9;
+    --text-color: white;
     --border-color: #2d2d2d;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
@@ -34,32 +34,28 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Main Wrapper to limit width and center */
 .app-wrapper {
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-/* 1. Header Section */
-.todo-head {
-    text-align: center;
-}
 
+.todo-head { text-align: center; }
 h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     margin-bottom: 20px;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    
 }
 
 #search-text {
     width: 100%;
-    padding: 12px 20px;
+    padding: 14px 20px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
     background: var(--card-bg);
@@ -68,96 +64,119 @@ h1 {
     box-shadow: var(--shadow);
 }
 
-/* 2. Input Section (The White Card) */
+
 .div-input-grid {
     background: var(--card-bg);
     padding: 25px;
     border-radius: 16px;
     box-shadow: var(--shadow);
     display: grid;
-    /* Three main columns like the image */
-    grid-template-columns: 1fr 200px 100px; 
+    grid-template-columns: 1fr 200px 120px;
     gap: 15px;
     border: 1px solid var(--border-color);
 }
 
-/* Description and Category span across the bottom */
-#description {
-    grid-column: span 3;
-    height: 60px;
-    resize: none;
-}
+#description { grid-column: span 2; height: 50px; }
 #category-text { grid-column: span 1; }
+.status-btn { background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-color); }
 
-input, textarea {
-    padding: 12px 15px;
+input, textarea, select {
+    padding: 12px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     background: var(--bg-color);
     color: var(--text-color);
     outline: none;
-    font-size: 15px;
 }
 
-/* 3. Buttons */
 .add-button {
     background: var(--primary-gradient);
     color: white;
     border: none;
-    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.add-button:hover { transform: translateY(-2px); }
-
-/* 4. Task List Container */
 #container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-/* Individual Task Row - Matches the Input Card Alignment */
 .todo-row {
     display: grid;
-    grid-template-columns: 1fr 200px 100px;
+    grid-template-columns: 0.7fr 120px 120px 130px 120px 100px ;
     align-items: center;
-    gap: 15px;
-    padding: 15px 25px;
-    transition: all 0.2s;
+    gap: 10px;
+    background: var(--card-bg);
+    padding: 12px 17px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: 0.2s;
+    position: relative;
 }
+
 
 .todo-row:hover {
-    transform: translateX(10px);
+    transform: translateX(8px);
+    border-color: #6366f1;
+}
+.task-main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.task-info {
+.task-top {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-weight: 500;
+    gap: 10px;
+    font-weight: 600;
 }
 
-.task-date {
+.task-desc {
+    font-size: 12px;
     color: #64748b;
-    font-size: 14px;
+    padding-left: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.delete-btn {
-    background: #fee2e2;
-    color: #ef4444;
+.task-cat, .task-date {
+    font-size: 13px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.status-select {
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.todo-row #delete-button {
+    background: #e96767;
+    color: white;
     border: none;
-    padding: 10px;
+    padding: 6px 10px;
     border-radius: 8px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
+
+    grid-column: 6;   /* last column */
+    grid-row: 1;      /* first row */
+    justify-self: end;
+    align-self: center;
 }
 
-.delete-btn:hover { background: #fecaca; }
 
-/* Floating Theme Toggle */
+.todo-row #delete-button:hover {
+    background: #d91b1b;
+}
+
+
 #themeToggle {
     position: fixed;
     top: 20px;
@@ -169,13 +188,7 @@ input, textarea {
     color: var(--text-color);
     cursor: pointer;
     box-shadow: var(--shadow);
-    z-index: 100;
+    z-index: 1000;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .div-input-grid, .todo-row {
-        grid-template-columns: 1fr;
-    }
-    #description { grid-column: span 1; }
-}
+.completed { text-decoration: line-through; opacity: 0.5; }

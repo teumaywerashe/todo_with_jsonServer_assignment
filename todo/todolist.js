@@ -117,6 +117,7 @@ const removeTodo = async(id) => {
 
 const addTodo = async(newTodo) => {
     try {
+        newTodo.className = "todo-row";
         const response = await fetch(`http://localhost:3001/todos/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -159,60 +160,63 @@ function add() {
     }
 }
 
+
 function display(todolist) {
-    // e.preventDefault()
     if (todolist.length === 0) {
-        document.getElementById("container").style.display = 'block'
-        document.getElementById("container").style.width = '80%'
-        document.getElementById("container").style.textAlign = 'center'
-
-
-        document.getElementById("container").innerHTML = "No To do to display";
+        container.style.display = "block";
+        container.style.width = "80%";
+        container.style.textAlign = "center";
+        container.innerHTML = "No To do to display";
     } else {
         let todoHTML = "";
 
-        todolist.forEach((todo, i) => {
-            console.log(todo.completed);
+        todolist.forEach((todo) => {
             todoHTML += `
-        <p
-                        class=${todo.completed ? "completed" : ""}>
-                <input class="checkbox" ${
-                  todo.completed ? "checked" : ""
-                } onchange="updateCompleted('${
-        todo.id
-      }', this.checked)" type='checkbox' > ${todo.name}
-        </p> 
-       
-        <p>
-          ${todo.description}
-        </p>   <p>
-         ${todo.category}
-        </p>
-        <p>
-         ${todo.dueDate} 
-        </p> 
-        <select onchange="updateCompleted('${todo.id}', this.value)">
-            <option value="in progress" ${
-              !todo.completed ? "selected" : ""
-            }>In progress</option>
+            <div class="todo-row ${todo.completed ? "completed" : ""}">
+                
+                <p>
+                    <input 
+                        class="checkbox"
+                        type="checkbox"
+                        ${todo.completed ? "checked" : ""}
+                        onchange="updateCompleted('${todo.id}', this.checked)"
+                    >
+                    ${todo.name}
+                </p>
 
-            <option value="completed" ${
-              todo.completed ? "selected" : ""
-            }>Completed</option>
-        </select>
-        <button type='button' id = 'delete-button'
-                onclick = 'removeTodo("${todo.id}")'>
-                Delete 
-        </button>  
-      
-               
-                `;
+                <p>${todo.description}</p>
+
+                <p>${todo.category}</p>
+
+                <p>${todo.dueDate}</p>
+
+                <select onchange="updateCompleted('${todo.id}', this.value)">
+                    <option value="in progress" ${!todo.completed ? "selected" : ""}>
+                        In progress
+                    </option>
+                    <option value="completed" ${todo.completed ? "selected" : ""}>
+                        Completed
+                    </option>
+                </select>
+
+                <button 
+                    type="button" 
+                    id="delete-button"
+                    onclick="removeTodo('${todo.id}')"
+                >
+                    Delete
+                </button>
+
+            </div>
+            `;
         });
 
-        container.style.display = "grid";
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
         container.innerHTML = todoHTML;
     }
 }
+
 
 
 // Light/Dark Theme
