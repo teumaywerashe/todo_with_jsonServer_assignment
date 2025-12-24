@@ -24,7 +24,7 @@ searchTextInput.addEventListener("input", () => {
 
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
-    toggleBtn.textContent = "☀️ Light Mode";
+    toggleBtn.textContent = "☀️";
 }
 
 toggleBtn.addEventListener("click", () => {
@@ -33,7 +33,7 @@ toggleBtn.addEventListener("click", () => {
     const theme = document.body.classList.contains("dark") ? "dark" : "light";
     localStorage.setItem("theme", theme);
 
-    toggleBtn.textContent = theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+    toggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
 });
 
 addButton.addEventListener("click", add);
@@ -75,27 +75,6 @@ const updateCompleted = async(id, completed) => {
         console.error("Error updating todo:", error);
     }
 };
-
-// const updateStatus = async (id, status) => {
-//   try {
-//     const completed = status.toLowerCase() === "completed";
-//     const response = await fetch(`http://localhost:3001/todos/${id}`, {
-//       method: "PATCH",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ completed }),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     console.log("Updated todo:", data);
-//     fetchtodo();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 const removeTodo = async(id) => {
     try {
@@ -221,7 +200,7 @@ function display(todolist) {
 
 // Light/Dark Theme
 
-const themeToggle = document.getElementById('themeToggle'); 
+const themeToggle = document.getElementById('themeToggle');
 
 themeToggle.addEventListener('click', () => {
     const html = document.documentElement;

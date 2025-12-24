@@ -14,7 +14,7 @@
       "dueDate": "2025-11-30",
       "description": "to study for exam",
       "category": "study",
-      "completed": true
+      "completed": false
     }
   ]
 }
